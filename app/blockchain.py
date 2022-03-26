@@ -103,7 +103,7 @@ def display_chain():
 				'length': len(blockchain.chain)}
 	return jsonify(response), 200
 
-@app.route('/valid', methods=['GET'])
+@app.route('/', methods=['GET'])
 def valid():
 	valid = blockchain.chain_valid(blockchain.chain)
 	
