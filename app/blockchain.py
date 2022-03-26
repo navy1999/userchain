@@ -111,4 +111,4 @@ def valid():
 		response = {'message': 'The Blockchain is valid.'}
 	else:
 		response = {'message': 'The Blockchain is not valid.'}
-	return jsonify(response), 200
+	return "hello"
