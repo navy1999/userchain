@@ -12,18 +12,18 @@ class Blockchain:
 
 	def __init__(self):
 		self.chain = []
-		self.create_block(proof=1, previous_hash='0',name=' ',age=0,gender=' ')
+		self.create_block(proof=1, previous_hash='0',sender=' ',recipient=' ',amount=0)
 
-	def create_block(self, proof, previous_hash,name,age,gender):
+	def create_block(self, proof, previous_hash,sender,recipient,amount):
 		block = {'index': len(self.chain) + 1,
 				'timestamp': str(datetime.datetime.now()),
 				'proof': proof,
 				'previous_hash': previous_hash,
                 'user-info':{
-                    'name':name,
-                    'age':age,
-                    'gender':gender
-                }}
+            'sender': sender,
+            'recipient': recipient,
+            'amount': amount,
+        }}
 		self.chain.append(block)
 		return block
 
@@ -76,22 +76,22 @@ app = Flask(__name__)
 blockchain = Blockchain()
 
 
-@app.route('/mine_block/<name>/<age>/<gender>', methods=['GET'])
-def mine_block(name,gender,age):
+@app.route('/mine_block/<sender>/<recipient>/<amount>', methods=['GET'])
+def mine_block(name,amount,recipient):
 	previous_block = blockchain.print_previous_block()
 	previous_proof = previous_block['proof']
 	proof = blockchain.proof_of_work(previous_proof)
 	previous_hash = blockchain.hash(previous_block)
-	block = blockchain.create_block(proof, previous_hash,name,age,gender)
-	response = {'message': 'A block is MINED',
+	block = blockchain.create_block(proof, previous_hash,sender,recipient,amount)
+	response = {'messrecipient': 'A block is MINED',
 				'index': block['index'],
 				'timestamp': block['timestamp'],
 				'proof': block['proof'],
 				'previous_hash': block['previous_hash'],
                 'user-info':{
-                                'name':name,
-                                'age':age,
-                                'gender':gender
+                                'sender':sender,
+                                'recipient':recipient,
+                                'amount':amount
                             }}
 	
 	return jsonify(response), 200
@@ -108,7 +108,7 @@ def valid():
 	valid = blockchain.chain_valid(blockchain.chain)
 	
 	if valid:
-		response = {'message': 'The Blockchain is valid.'}
+		response = {'messrecipient': 'The Blockchain is valid.'}
 	else:
-		response = {'message': 'The Blockchain is not valid.'}
+		response = {'messrecipient': 'The Blockchain is not valid.'}
 	return jsonify(response),200
