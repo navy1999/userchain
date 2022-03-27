@@ -77,7 +77,7 @@ blockchain = Blockchain()
 
 
 @app.route('/mine_block/<sender>/<recipient>/<amount>', methods=['GET'])
-def mine_block(name,amount,recipient):
+def mine_block(sender,amount,recipient):
 	previous_block = blockchain.print_previous_block()
 	previous_proof = previous_block['proof']
 	proof = blockchain.proof_of_work(previous_proof)
