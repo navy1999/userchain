@@ -108,7 +108,7 @@ def valid():
 	valid = blockchain.chain_valid(blockchain.chain)
 	
 	if valid:
-		response = {'messrecipient': 'The Blockchain is valid.'}
+		response = {'message': 'The Blockchain is valid.'}
 	else:
-		response = {'messrecipient': 'The Blockchain is not valid.'}
+		response = {'message': 'The Blockchain is not valid.'}
 	return jsonify(response),200
