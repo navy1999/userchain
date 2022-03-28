@@ -104,7 +104,7 @@ def display_chain():
 	return jsonify(response), 200
 @app.route('/',methods=['GET'])
 def display_chain():
-    return "<h1>Userchain node Landing Page</h1>"
+    return "Userchain node Landing Page"
 @app.route('/valid', methods=['GET'])
 def valid():
 	valid = blockchain.chain_valid(blockchain.chain)
