@@ -102,7 +102,9 @@ def display_chain():
 	response = {'chain': blockchain.chain,
 				'length': len(blockchain.chain)}
 	return jsonify(response), 200
-
+@app.route('/',methods=['GET'])
+def display_chain():
+    return "<h1>Userchain node Landing Page</h1> <a href='userchain.herokuapp.com/get_chain'>View Chain</a> <a>to mine a new block :userchain.herokuapp.com/mine_block/sender/reciever/amount</a>"
 @app.route('/valid', methods=['GET'])
 def valid():
 	valid = blockchain.chain_valid(blockchain.chain)
